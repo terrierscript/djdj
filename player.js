@@ -3,18 +3,25 @@ const ReactDom = require("react-dom")
 const { Component } = React
 const fs = require("fs")
 const path = require("path")
-const baseDir = "/Users/inuscript/otake"
-const audios = fs.readdirSync(baseDir).filter( (file) => {
-  return file.indexOf("mp3") > -1
-}).map ( (file) => {
-  return path.resolve(baseDir , file)
-})
 
-const Audio = ( {title, url} ) => {
-  return <div>
-    <div>{title}</div>
-    <audio src={url} controls/>
-  </div>
+const bgmDir = "/Users/inuscript/otake/bgm"
+const filterMp3 = (dir) => {
+  return fs.readdirSync(dir).filter( (file) => {
+    return file.indexOf("mp3") > -1
+  }).map ( (file) => {
+    return path.resolve(dir , file)
+  })
+}
+const audios = filterMp3(bgmDir)
+
+class Audio extends Component {
+  render() {
+    let {title, url} = this.props
+    return <div style={{paddingBottom:"20px"}} >
+      <div>{title}</div>
+      <audio src={url} controls preload="metadata" volume="0.5"/>
+    </div>
+  }
 }
 
 const Button = () => {
