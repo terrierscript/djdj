@@ -19,7 +19,7 @@ class Audio extends Component {
     let {title, url} = this.props
     return <div style={{paddingBottom:"20px"}} >
       <div>{title}</div>
-      <audio src={url} controls preload="metadata" volume="0.5"/>
+      <audio src={url} volume={0.5} controls preload="metadata" />
     </div>
   }
 }
